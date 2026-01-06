@@ -35,7 +35,7 @@ void countsort(int arr[], int n, int exp) {
     int i, count[10] = {0};
 
     for (i = 1; i < n; i++) {
-        count[i] += count[i-1];
+        count[(arr[i] / exp) % 10]++;
     }
 
     for (i = 1; i < 10; i++) {

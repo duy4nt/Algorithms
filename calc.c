@@ -7,7 +7,10 @@
 #define NUMBER '0'
 #define MAXVAL 100
 #define MAXLINE 1000
+#define BUFSIZE 100
 
+char buf[BUFSIZE];
+int bufp = 0;
 int sp = 0;
 double val[MAXVAL];
 
@@ -63,8 +66,6 @@ main() {
     return 0;
 }
 
-int gettop()
-
 double atof(char s[]) {
     int i, sign;
     double val, power;
@@ -100,6 +101,41 @@ double pop() {
     else
         prinf("Stack empty");
         return 0.0;
+}
+
+int gettop(char s[]) {
+    int c, i;
+
+    while((s[0] = c = getch()) == ' ' || c == '\t') ;
+    s[i] = '\0';
+
+    if (!isdigit(c) && c!=  '.')
+        return c;
+    i = 0;
+    
+    if (isdigit(c)) {
+        while (isdigit(s[i++] = c = getch())) ;
+    }
+    if (c == '.') {
+        while (isdigit(s[++i] = c = getch())) ;
+    }
+
+    s[i] = '\0';
+    if (c != EOF)
+        ungetch(c);
+
+    return NUMBER;
+}
+
+int getch(void) {
+    return (bufp > 0) ? buf[--buf] : getchar();
+}
+
+void ungetch(int c) {
+    if (bufp > BUFSIZE)
+        printf("ungetch: too many character\n");
+    else 
+        buf[bufp++] = c;
 }
 
 bool isspaced(int c) {

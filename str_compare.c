@@ -12,8 +12,8 @@ main() {
     char str_one[MAXLEN];
     char str_two[MAXLEN];
 
-    get_char(str_one);
-    get_char(str_two)
+    get_str(str_one);
+    get_str(str_two)
     
     res = cmp(str_one, str_two);
 
